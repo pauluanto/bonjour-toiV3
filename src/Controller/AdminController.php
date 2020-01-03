@@ -18,11 +18,11 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(VoitureRepository $repo,PaginatorInterface $paginatorInterface, Request $request)
+    public function index(VoitureRepository $repo, PaginatorInterface $paginatorInterface, Request $request)
     {
         $rechercheVoiture = new RechercheVoiture();
 
-        $form = $this->createForm(RechercheVoitureType::class,$rechercheVoiture);
+        $form = $this->createForm(RechercheVoitureType::class, $rechercheVoiture);
         $form->handleRequest($request);
 
         $voitures = $paginatorInterface->paginate(
@@ -30,10 +30,11 @@ class AdminController extends AbstractController
             $request->query->getInt('page', 1), /*page number*/
             6 /*limit per page*/
         );
-        return $this->render('voiture/voitures.html.twig',[
+        return $this->render('voiture/voitures.html.twig', [
             "voitures" => $voitures,
             "form" => $form->createView(),
-            "admin" => true
+            "admin" => true,
+
         ]);
     }
 
@@ -41,32 +42,64 @@ class AdminController extends AbstractController
      * @Route("/admin/creation", name="creationVoiture")
      * @Route("/admin/{id}", name="modifVoiture", methods="GET|POST")
      */
-    public function modification(Voiture $voiture = null, Request $request, ObjectManager $om){
-        if(!$voiture){
+    public function modification(Voiture $voiture = null, Request $request, ObjectManager $om)
+    {
+        if (!$voiture) {
             $voiture = new Voiture();
         }
-        
-        $form = $this->createForm(VoitureType::class,$voiture);
+
+        $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $om->persist($voiture);
             $om->flush();
             $this->addFlash('success', "L'action a été effectué");
             return $this->redirectToRoute("admin");
         }
 
-        return $this->render('admin/modification.html.twig',[
+        return $this->render('admin/modification.html.twig', [
             "voiture" => $voiture,
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "user" => true,
+
+        ]);
+    }
+
+    /**
+     * @Route("/user/creation", name="creationProfil")
+     * @Route("/user/{id}", name="modifprofil", methods="GET|POST")
+     */
+    public function modificationProfil(Voiture $voiture = null, Request $request, ObjectManager $om)
+    {
+        if (!$voiture) {
+            $voiture = new Voiture();
+        }
+
+        $form = $this->createForm(VoitureType::class, $voiture);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $om->persist($voiture);
+            $om->flush();
+            $this->addFlash('success', "L'action a été effectué");
+            return $this->redirectToRoute("accueil");
+        }
+
+        return $this->render('admin/modification.html.twig', [
+            "voiture" => $voiture,
+            "form" => $form->createView(),
+            "user" => true,
+
         ]);
     }
 
     /**
      * @Route("/admin/{id}", name="supVoiture", methods="SUP")
      */
-    public function suppression(Voiture $voiture, Request $request, ObjectManager $om){
-        if($this->isCsrfTokenValid("SUP".$voiture->getId(), $request->get("_token"))){
+    public function suppression(Voiture $voiture, Request $request, ObjectManager $om)
+    {
+        if ($this->isCsrfTokenValid("SUP" . $voiture->getId(), $request->get("_token"))) {
             $om->remove($voiture);
             $om->flush();
             $this->addFlash('success', "L'action a été effectué");
