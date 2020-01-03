@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VoitureController extends AbstractController
 {
     /**
-     * @Route("/client/voitures", name="voitures")
+     * @Route("/client/voitures", name="profiles")
      */
     public function index(VoitureRepository $repo,PaginatorInterface $paginatorInterface, Request $request)
     {
@@ -30,7 +30,7 @@ class VoitureController extends AbstractController
         return $this->render('voiture/voitures.html.twig',[
             "voitures" => $voitures,
             "form" => $form->createView(),
-            "admin" => false
+            "admin" => true
         ]);
     }
 }
