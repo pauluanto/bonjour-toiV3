@@ -66,33 +66,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/creation", name="creationProfil")
-     * @Route("/user/{id}", name="modifprofil", methods="GET|POST")
-     */
-    public function modificationProfil(Voiture $voiture = null, Request $request, ObjectManager $om)
-    {
-        if (!$voiture) {
-            $voiture = new Voiture();
-        }
-
-        $form = $this->createForm(VoitureType::class, $voiture);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $om->persist($voiture);
-            $om->flush();
-            $this->addFlash('success', "L'action a été effectué");
-            return $this->redirectToRoute("accueil");
-        }
-
-        return $this->render('admin/modification.html.twig', [
-            "voiture" => $voiture,
-            "form" => $form->createView(),
-            "user" => true,
-
-        ]);
-    }
 
     /**
      * @Route("/admin/{id}", name="supVoiture", methods="SUP")
