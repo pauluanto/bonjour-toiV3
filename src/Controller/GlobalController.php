@@ -35,6 +35,7 @@ class GlobalController extends AbstractController
             $utilisateur->setRoles("ROLE_USER");
             $om->persist($utilisateur);
             $om->flush();
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
             return $this->redirectToRoute("accueil");
         }
 

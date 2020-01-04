@@ -10,9 +10,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity(
- * fields = {"username"},
- * message="le user existe déjà"
+ * fields = {"username", "Email"},
+ * message="le user ou l'email existe déjà"
  * )
+ *
  */
 class Utilisateur implements UserInterface
 {
@@ -42,6 +43,11 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $roles;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $Email;
 
     public function getId(): ?int
     {
@@ -101,6 +107,18 @@ class Utilisateur implements UserInterface
     }
     public function getSalt(){
 
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->Email;
+    }
+
+    public function setEmail(string $Email): self
+    {
+        $this->Email = $Email;
+
+        return $this;
     }
 }
 
