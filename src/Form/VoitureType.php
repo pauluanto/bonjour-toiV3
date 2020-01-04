@@ -17,7 +17,7 @@ class VoitureType extends AbstractType
             ->add('pseudo')
             ->add('ville')
             ->add('taille')
-            ->add('sexe')
+            ->add('jerecherche')
             ->add('annedenaissance')
             ->add('description')
             ->add('couleurYeux')

@@ -61,7 +61,7 @@ class AppFixtures extends Fixture
                     ->setCitation($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setCouleurCheveux($faker->colorName)
                     ->setCouleurYeux($faker->colorName)
-                    ->setSexe($faker->text($maxNbChars = 20, $indexSize = 1))
+                    ->setJerecherche($faker->text($maxNbChars = 20, $indexSize = 1))
                     ->setVille($faker->city)
                     ->setFilms($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setLangueParle($faker->text($maxNbChars = 20, $indexSize = 5))
