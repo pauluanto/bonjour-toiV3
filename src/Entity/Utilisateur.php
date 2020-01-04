@@ -33,7 +33,7 @@ class Utilisateur implements UserInterface
      */
     private $password;
 
-     /**
+    /**
      * @Assert\EqualTo(propertyPath="password",message="Les mdp ne correspondent pas")
      */
     private $verifPassword;
@@ -103,3 +103,4 @@ class Utilisateur implements UserInterface
 
     }
 }
+
