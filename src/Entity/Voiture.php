@@ -28,8 +28,8 @@ class Voiture
     private $anne_de_naissance;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Modele", inversedBy="voitures")
-     */
+ * @ORM\ManyToOne(targetEntity="App\Entity\Modele", inversedBy="voitures")
+ */
     private $modele;
 
     /**
@@ -86,6 +86,8 @@ class Voiture
      * @ORM\Column(type="string", length=255)
      */
     private $Ville;
+
+
 
     public function getId(): ?int
     {
@@ -260,4 +262,5 @@ class Voiture
 
         return $this;
     }
+
 }
