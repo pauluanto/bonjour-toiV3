@@ -4,10 +4,10 @@
 
 {% block monTitre %}{{ voiture.pseudo}}{% endblock %}
 {% block body %}
-{{form_start(form)}}
+    {{form_start(form)}}
     {{form_widget(form)}}
     <a href="{{path('admin')}}" class="btn btn-primary">Retour</a>
     <input type="submit" value="vaider" class ="btn btn-success">
-{{form_end(form)}}
+    {{form_end(form)}}
 
 {% endblock %}
