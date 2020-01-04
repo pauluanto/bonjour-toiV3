@@ -27,8 +27,8 @@ class AdminController extends AbstractController
 
         $voitures = $paginatorInterface->paginate(
             $repo->findAllWithPagination($rechercheVoiture),
-            $request->query->getInt('page', 1), /*page number*/
-            6 /*limit per page*/
+            $request->query->getInt('page', 1) /*page number*/,
+            40 /*limit per page*/
         );
         return $this->render('voiture/voitures.html.twig', [
             "voitures" => $voitures,

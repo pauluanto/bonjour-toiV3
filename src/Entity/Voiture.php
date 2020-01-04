@@ -75,7 +75,7 @@ class Voiture
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Sexe;
+    private $Jerecherche;
 
     /**
      * @ORM\Column(type="integer")
@@ -227,14 +227,14 @@ class Voiture
         return $this;
     }
 
-    public function getSexe(): ?string
+    public function getJerecherche(): ?string
     {
-        return $this->Sexe;
+        return $this->Jerecherche;
     }
 
-    public function setSexe(string $Sexe): self
+    public function setJerecherche(string $Jerecherche): self
     {
-        $this->Sexe = $Sexe;
+        $this->Jerecherche = $Jerecherche;
 
         return $this;
     }
