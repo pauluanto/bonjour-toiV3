@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,6 +15,7 @@ class InscriptionType extends AbstractType
     {
         $builder
             ->add('username')
+            ->add('email', EmailType::class)
             ->add('password',PasswordType::class)
             ->add('verifPassword',PasswordType::class)
         ;
