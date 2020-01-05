@@ -17,7 +17,7 @@ class Voiture
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=150)
      */
     private $pseudo;
 
@@ -27,10 +27,6 @@ class Voiture
      */
     private $anne_de_naissance;
 
-    /**
- * @ORM\ManyToOne(targetEntity="App\Entity\Modele", inversedBy="voitures")
- */
-    private $modele;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -119,17 +115,6 @@ class Voiture
         return $this;
     }
 
-    public function getModele(): ?Modele
-    {
-        return $this->modele;
-    }
-
-    public function setModele(?Modele $modele): self
-    {
-        $this->modele = $modele;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
