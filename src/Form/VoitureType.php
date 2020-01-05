@@ -28,10 +28,6 @@ class VoitureType extends AbstractType
             ->add('loisirs')
             ->add('langueParle')
 
-            ->add('modele',EntityType::class,[
-                'class' => Modele::class,
-                'choice_label' => 'libelle'
-            ])
         ;
     }
 
