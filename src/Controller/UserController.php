@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Voiture;
+use App\Entity\Utilisateur;
 use App\Form\VoitureType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +14,10 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/user/creation", name="creationProfil")
+     * @param Voiture|null $voiture
+     * @param Request $request
+     * @param ObjectManager $om
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function modificationProfil(Voiture $voiture = null, Request $request, ObjectManager $om)
     {
@@ -24,6 +29,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $voiture->setUser($this->getUser());
             $om->persist($voiture);
             $om->flush();
             $this->addFlash('success', "L'action a été effectué");

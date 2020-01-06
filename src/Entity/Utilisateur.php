@@ -19,7 +19,7 @@ class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -28,6 +28,7 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $username;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -38,6 +39,11 @@ class Utilisateur implements UserInterface
      * @Assert\EqualTo(propertyPath="password",message="Les mdp ne correspondent pas")
      */
     private $verifPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Voiture", mappedBy="user")
+     */
+    private $recettes;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -119,6 +125,38 @@ class Utilisateur implements UserInterface
         $this->Email = $Email;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * @param mixed $utilisateur
+     */
+    public function setUtilisateur($utilisateur): void
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecettes()
+    {
+        return $this->recettes;
+    }
+
+    /**
+     * @param mixed $recettes
+     */
+    public function setRecettes($recettes): void
+    {
+        $this->recettes = $recettes;
     }
 }
 
