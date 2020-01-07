@@ -17,7 +17,7 @@ class Voiture
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="recettes")
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", inversedBy="recettes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -89,7 +89,9 @@ class Voiture
      */
     private $Ville;
 
-
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $user_id;
 
 

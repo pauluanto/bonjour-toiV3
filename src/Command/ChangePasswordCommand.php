@@ -40,12 +40,13 @@ class ChangePasswordCommand extends Command
     {
         $email = $input->getArgument('email');
         // Vous voulez peut-être remplacer "email" par un autre champ (ie, "username")
-       $Utilisateur = $this->entityManager->getRepository(User::class)->findOneBy([
+       $Utilisateur = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
             'email' => $email,
         ]);
         if (!$email) {
             throw new \Exception('Unable to find a matching User for given e-mail address');
         }
+        /** @var TYPE_NAME $Utilisateur */
         $password = $this->passwordEncoder->encodePassword($Utilisateur, $input->getArgument('password'));
         $Utilisateur->setPassword($password);
         $this->entityManager->persist($Utilisateur);

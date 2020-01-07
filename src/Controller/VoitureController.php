@@ -11,7 +11,7 @@ class VoitureController extends AbstractController
 {
 
     /**
-     * @Route("/user/profiles", name="profiles")
+     * @Route("/profiles", name="profiles")
      */
     public function index(VoitureRepository $repo,PaginatorInterface $paginatorInterface, Request $request)
     {
@@ -22,7 +22,7 @@ class VoitureController extends AbstractController
         $voitures = $paginatorInterface->paginate(
             $repo->findAllWithPagination($rechercheVoiture),
             $request->query->getInt('page', 1), /*page number*/
-            40 /*limit per page*/
+            100 /*limit per page*/
         );
         return $this->render('voiture/voitures.html.twig',[
             "voitures" => $voitures,
