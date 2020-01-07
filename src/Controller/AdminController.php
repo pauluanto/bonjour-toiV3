@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Entity\Voiture;
 use App\Entity\RechercheVoiture;
 use App\Form\RechercheVoitureType;
-use App\Form\UtilisateurType;
+use App\Form\VoitureType;
 use App\Repository\VoitureRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,6 +18,10 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
+     * @param VoitureRepository $repo
+     * @param PaginatorInterface $paginatorInterface
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(VoitureRepository $repo, PaginatorInterface $paginatorInterface, Request $request)
     {
@@ -28,7 +33,7 @@ class AdminController extends AbstractController
         $voitures = $paginatorInterface->paginate(
             $repo->findAllWithPagination($rechercheVoiture),
             $request->query->getInt('page', 1) /*page number*/,
-            40 /*limit per page*/
+            6 /*limit per page*/
         );
         return $this->render('voiture/voitures.html.twig', [
             "voitures" => $voitures,
@@ -41,25 +46,30 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/creation", name="creationVoiture")
      * @Route("/admin/{id}", name="modifVoiture", methods="GET|POST")
+     * @param Voiture|null $voiture
+     * @param Request $request
+     * @param ObjectManager $om
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function modification(Utilisateur $utilisateur = null, Request $request, ObjectManager $om)
+    public function modification(Voiture $voiture = null, Request $request, ObjectManager $om)
     {
-        if (!$utilisateur) {
-            $utilisateur = new Utilisateur();
+        if (!$voiture) {
+            $voiture = new Voiture();
         }
 
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $om->persist($utilisateur);
+            $voiture->setUser($this->getUser());
+            $om->persist($voiture);
             $om->flush();
             $this->addFlash('success', "L'action a été effectué");
             return $this->redirectToRoute("admin");
         }
 
         return $this->render('admin/modification.html.twig', [
-            "voiture" => $utilisateur,
+            "voiture" => $voiture,
             "form" => $form->createView(),
             "user" => true,
 
@@ -70,10 +80,10 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/{id}", name="supVoiture", methods="SUP")
      */
-    public function suppression(Utilisateur $utilisateur, Request $request, ObjectManager $om)
+    public function suppression(Voiture $voiture, Request $request, ObjectManager $om)
     {
-        if ($this->isCsrfTokenValid("SUP" . $utilisateur->getId(), $request->get("_token"))) {
-            $om->remove($utilisateur);
+        if ($this->isCsrfTokenValid("SUP" . $voiture->getId(), $request->get("_token"))) {
+            $om->remove($voiture);
             $om->flush();
             $this->addFlash('success', "L'action a été effectué");
             return $this->redirectToRoute("admin");

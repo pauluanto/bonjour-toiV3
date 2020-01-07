@@ -9,10 +9,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
- * @UniqueEntity(
- * fields = {"username"},
- * message="le user ou l'email existe déjà"
- * )
+ * @UniqueEntity(fields = {"username"},message="L'utilisateur existe déja")
+ * @UniqueEntity(fields = {"Email"},message="L'email existe déjà")
  *
  */
 class Utilisateur implements UserInterface
@@ -36,12 +34,12 @@ class Utilisateur implements UserInterface
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password",message="Les mdp ne correspondent pas")
+     * @Assert\EqualTo(propertyPath="password",message="Les mots de passes ne correspondent pas")
      */
     private $verifPassword;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Voiture", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\Voiture", mappedBy="user")
      */
     private $recettes;
 
@@ -51,7 +49,8 @@ class Utilisateur implements UserInterface
     private $roles;
 
     /**
-     * @ORM\Column(name="Email", type="string", length=255)
+     * @ORM\Column(name="Email", type="string", length=255, unique=true)
+     * @Assert\Email
      */
     private $Email;
 
