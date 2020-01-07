@@ -59,7 +59,6 @@ class AdminController extends AbstractController
 
         $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $voiture->setUser($this->getUser());
             $om->persist($voiture);
