@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification de la voiture{% endblock %}
+{% block title %}Modification d'un profil{% endblock %}
 
 {% block monTitre %}{{ voiture.pseudo}}{% endblock %}
 {% block body %}
@@ -8,7 +8,7 @@
     {{form_start(form)}}
 
 <div>
-    <div class="step1">
+    <div id="step-1">
        <div class="m-4">
             {{form_row(form.pseudo)}}
        </div>
@@ -28,11 +28,11 @@
             {{form_row(form.citation)}}
         </div>
 
-       <button type="button" onclick="">
+       <button type="button" id="next" class="btn btn-primary">
 suivant
        </button>
     </div>
-     <div class="step2 d-none">
+     <div id="step-2" style="display: none">
         <div class="m-4">
             {{form_row(form.livres)}}
         </div>
@@ -54,16 +54,27 @@ suivant
         <div class="m-4">
             {{form_row(form.ville)}}
         </div>
+         <button type="button" id="before" class="btn btn-primary">
+             Précédent</button>
 
-    <a href="{{path('admin')}}" class="btn btn-primary">Retour</a>
+
     <input type="submit" value="valider" class ="btn btn-success">
      </div>
 </div>
     {{form_end(form)}}
-<script>
 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-</script>
+    <script>
+            $("#next").click(function (){
+                $("#step-1").css("display","none");
+                $("#step-2").css("display","block");
+            });
+            $("#before").click(function (){
+                $("#step-2").css("display","none");
+                $("#step-1").css("display","block");
+            });
+    </script>
 
 {% endblock %}
 
