@@ -4,10 +4,67 @@
 
 {% block monTitre %}{{ voiture.pseudo}}{% endblock %}
 {% block body %}
+
     {{form_start(form)}}
-    {{form_widget(form)}}
+
+<div>
+    <div class="step1">
+       <div class="m-4">
+            {{form_row(form.pseudo)}}
+       </div>
+        <div class="m-4">
+            {{form_row(form.annedenaissance)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.description)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.couleurYeux)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.couleurCheveux)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.citation)}}
+        </div>
+
+       <button type="button" onclick="">
+suivant
+       </button>
+    </div>
+     <div class="step2 d-none">
+        <div class="m-4">
+            {{form_row(form.livres)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.films)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.loisirs)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.langueParle)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.jerecherche)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.taille)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.ville)}}
+        </div>
+
     <a href="{{path('admin')}}" class="btn btn-primary">Retour</a>
     <input type="submit" value="valider" class ="btn btn-success">
+     </div>
+</div>
     {{form_end(form)}}
+<script>
+
+
+</script>
 
 {% endblock %}
+
+
