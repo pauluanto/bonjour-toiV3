@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 
         $faker = \Faker\Factory::create('fr_FR');
 
-            for($i=1; $i <= 50; $i++){
+            for($i=1; $i <= 100; $i++){
                 $voiture = new Voiture();
 
                 $voiture->setPseudo($faker->name("[A-Z]{2}[0-9]{3,4}[A-Z]{2}"))
@@ -30,9 +30,7 @@ class AppFixtures extends Fixture
                     ->setFilms($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setLangueParle($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setLoisirs($faker->text($maxNbChars = 20, $indexSize = 5))
-                    ->setLivres($faker->text($maxNbChars = 20, $indexSize = 5))
-                    ->setSexe($faker->title($gender = 'homme'|'femme'))
-                ;
+                    ->setLivres($faker->text($maxNbChars = 20, $indexSize = 5));
 
                 $manager->persist($voiture);
             }

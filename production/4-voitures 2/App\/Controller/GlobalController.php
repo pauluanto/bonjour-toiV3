@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\RechercheVoiture;
 use App\Entity\Utilisateur;
 use App\Form\InscriptionType;
@@ -14,6 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 
 class GlobalController extends AbstractController
 {
@@ -79,4 +80,9 @@ class GlobalController extends AbstractController
      */
     public function logout(){
     }
+
+
+
+
+
 }

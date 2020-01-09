@@ -27,10 +27,6 @@ class Voiture
      */
     private $pseudo;
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $sexe;
 
     /**
      * @ORM\Column(type="integer")
@@ -262,16 +258,6 @@ class Voiture
         return $this;
     }
 
-    public function getSexe(): ?string
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe($sexe): void
-    {
-        $this->sexe = $sexe;
-    }
-
     /**
      * @return mixed
      */
@@ -303,7 +289,5 @@ class Voiture
     {
         $this->user_id = $user_id;
     }
-
-
 
 }

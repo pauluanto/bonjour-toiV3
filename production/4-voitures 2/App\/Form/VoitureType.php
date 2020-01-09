@@ -30,7 +30,6 @@ class VoitureType extends AbstractType
             ->add('livres')
             ->add('films')
             ->add('loisirs')
-            ->add('sexe')
             ->add('langueParle')
         ;
     }
