@@ -17,10 +17,20 @@ class Voiture
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", inversedBy="recettes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="string", length=150)
      */
     private $pseudo;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $sexe;
 
     /**
      * @ORM\Column(type="integer")
@@ -83,6 +93,10 @@ class Voiture
      */
     private $Ville;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $user_id;
 
 
     public function getId(): ?int
@@ -247,5 +261,49 @@ class Voiture
 
         return $this;
     }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe($sexe): void
+    {
+        $this->sexe = $sexe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id): void
+    {
+        $this->user_id = $user_id;
+    }
+
+
 
 }

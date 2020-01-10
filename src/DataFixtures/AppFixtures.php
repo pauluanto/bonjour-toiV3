@@ -11,6 +11,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
+
+
         $faker = \Faker\Factory::create('fr_FR');
 
             for($i=1; $i <= 50; $i++){
@@ -18,7 +20,7 @@ class AppFixtures extends Fixture
 
                 $voiture->setPseudo($faker->name("[A-Z]{2}[0-9]{3,4}[A-Z]{2}"))
                     ->setTaille($faker->randomElement($array = array(140,200)))
-                    ->setAnnedenaissance($faker->numberBetween($min=1900,$max=2002))
+                    ->setAnnedenaissance($faker->numberBetween($min=1930,$max=2002))
                     ->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2))
                     ->setCitation($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setCouleurCheveux($faker->colorName)
@@ -28,7 +30,9 @@ class AppFixtures extends Fixture
                     ->setFilms($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setLangueParle($faker->text($maxNbChars = 20, $indexSize = 5))
                     ->setLoisirs($faker->text($maxNbChars = 20, $indexSize = 5))
-                    ->setLivres($faker->text($maxNbChars = 20, $indexSize = 5));
+                    ->setLivres($faker->text($maxNbChars = 20, $indexSize = 5))
+                    ->setSexe($faker->title($gender = 'homme'|'femme'))
+                ;
 
                 $manager->persist($voiture);
             }

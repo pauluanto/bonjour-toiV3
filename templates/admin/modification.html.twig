@@ -1,13 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification de la voiture{% endblock %}
+{% block title %}Modification d'un profil{% endblock %}
 
 {% block monTitre %}{{ voiture.pseudo}}{% endblock %}
 {% block body %}
+
     {{form_start(form)}}
-    {{form_widget(form)}}
-    <a href="{{path('admin')}}" class="btn btn-primary">Retour</a>
-    <input type="submit" value="vaider" class ="btn btn-success">
+
+<div>
+    <div id="step-1">
+       <div class="m-4">
+            {{form_row(form.pseudo)}}
+       </div>
+        <div class="m-4">
+            {{form_row(form.sexe)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.annedenaissance)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.description)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.couleurYeux)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.couleurCheveux)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.citation)}}
+        </div>
+
+       <button type="button" id="next" class="btn btn-primary">
+suivant
+       </button>
+    </div>
+     <div id="step-2" style="display: none">
+        <div class="m-4">
+            {{form_row(form.livres)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.films)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.loisirs)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.langueParle)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.jerecherche)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.taille)}}
+        </div>
+        <div class="m-4">
+            {{form_row(form.ville)}}
+        </div>
+         <button type="button" id="before" class="btn btn-primary">
+             Précédent</button>
+
+
+    <input type="submit" value="valider" class ="btn btn-success">
+     </div>
+</div>
     {{form_end(form)}}
 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+            $("#next").click(function (){
+                $("#step-1").css("display","none");
+                $("#step-2").css("display","block");
+            });
+            $("#before").click(function (){
+                $("#step-2").css("display","none");
+                $("#step-1").css("display","block");
+            });
+    </script>
+
 {% endblock %}
+
+

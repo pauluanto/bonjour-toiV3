@@ -1,8 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
+{% block monTitre %}
+    <h1 class="text-center m-5" > Bienvenue </h1>{% endblock %}
 
-{% block monTitre %}Bienvenue sur Bonjour-Toi{% endblock %}
+
 {% block body %}
+   <div class="container">
+    <div class="row no-gutters">
 
+        {% for voiture in voitures %}
+            <div class="col-12  p-1">
+                <div class="card mb-3">
+                    <div class="row no-gutters align-item p-2">
+                        <div class="col-12 col-md-4">
+                            <img src="{{asset('images/modelefemme2.jpg')}}" class=" auto container card-body">
+                        </div>
+                        <div class="col">
+                            <div class="card-body ">
+                                <h5 class="card-title">{{voiture.pseudo}}</h5>
+                                <p class="card-text">
+                                <div>Je recherche : {{voiture.jerecherche}}</div>
+                                <div>Ville : {{voiture.ville}}</div>
+                                <div>Description : {{voiture.description}}</div>
+                                <div>Taille : {{voiture.Taille}}</div>
+                                <div>Année de naissance: {{voiture.annedenaissance}}</div>
+                                <div>Couleur des yeux : {{voiture.couleuryeux}}</div>
+                                <div>Couleur des cheveux : {{voiture.couleurcheveux}}</div>
+                                <div>Citations : {{voiture.citation}}</div>
+                                <div>Livres préférés : {{voiture.livres}}</div>
+                                <div>Films préférés : {{voiture.films}}</div>
+                                <div>Loisirs : {{voiture.loisirs}}</div>
+                                <div>Langue parlé : {{voiture.langueparle}}</div>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+       {% endfor %}
+    </div>
 {% endblock %}
