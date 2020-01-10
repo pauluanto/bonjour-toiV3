@@ -18,14 +18,17 @@ class VoitureController extends AbstractController
      * @param VoitureRepository $repo
      * @param PaginatorInterface $paginatorInterface
      * @param Request $request
+     * @param $pagination
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(VoitureRepository $repo,PaginatorInterface $paginatorInterface, Request $request)
+    public function index(VoitureRepository $repo, PaginatorInterface $paginatorInterface, Request $request)
     {
 
         $rechercheVoiture = new RechercheVoiture();
+
         $form = $this->createForm(RechercheVoitureType::class,$rechercheVoiture);
         $form->handleRequest($request);
+
         $voitures = $paginatorInterface->paginate(
             $repo->findAllWithPagination($rechercheVoiture),
             $request->query->getInt('page', 1), /*page number*/
