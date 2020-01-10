@@ -7,7 +7,9 @@ use App\Entity\Utilisateur;
 use App\Form\InscriptionType;
 use App\Form\RechercheVoitureType;
 use App\Repository\VoitureRepository;
+use http\Env\Response;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,21 +61,31 @@ class GlobalController extends AbstractController
             $om->persist($utilisateur);
             $om->flush();
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
-            return $this->redirectToRoute("accueil");
+            return $this->redirectToRoute("login");
         }
         return $this->render('global/inscription.html.twig',[
             "form" => $form->createView()
         ]);
     }
+
     /**
      * @Route("/login", name="login")
+     * @param AuthenticationUtils $util
+     * @param $AutenticationUtils
+     * @param $Utilisateur
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function login(AuthenticationUtils $util){
-        return $this->render('global/login.html.twig',[
-            "lastUserName" => $util->getLastUsername(),
-            "error" => $util->getLastAuthenticationError()
-        ]);
+    public function login(AuthenticationUtils $util)
+    {
+
+            return $this->render('global/login.html.twig', [
+                "lastUserName" => $util->getLastUsername(),
+                "error" => $util->getLastAuthenticationError()
+            ]);
+
     }
+
+
     /**
      * @Route("/logout", name="logout")
      */

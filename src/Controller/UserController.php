@@ -26,7 +26,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}", name="user_modif", methods="GET|POST")
+     * @Route("/users/{id}", name="user_modif", methods="GET|POST")
      */
     public function modificationProfil(Voiture $voiture = null, Request $request, ObjectManager $om)
     {
