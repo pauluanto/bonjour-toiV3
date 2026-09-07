@@ -15,5 +15,11 @@
     },
     "dependencies": {
         "jquery": "^3.4.1"
+    },
+    "resolutions": {
+        "browserslist": "^4.28.7"
+    },
+    "overrides": {
+        "browserslist": "^4.28.7"
     }
 }
